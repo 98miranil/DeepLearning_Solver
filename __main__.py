@@ -6,6 +6,8 @@ import sys
 #Other python files
 sys.path.insert(1, r"C:\MSI\projectes\Python\MachineLearning\DeepLearning_Solver\lib")
 import standarize
+import create_model
+import evaluate_model
 
 #MAIN PROGRAM
 """
@@ -33,4 +35,13 @@ scalar_decision = input("Do you want to scale the data [Y/N]? \n")
 if(scalar_decision == "Y"):
     X_train, X_test = standarize.scale_data(X_train,X_test)
 
+model = create_model.define_manual_model(len(dataset.columns)-1)
+create_model.read_model(model)
+create_model.compile_manual_model(model)
+create_model.fit_model(model, X_train, y_train)
+print("\n\nYou have obtained:")
+evaluate_model.evaluate_model(model, X_test, y_test)
+save = input("\n\nDo you want to save the model [Y/N]? \n")
+if save == "Y":
+    create_model.save_model(model)
 
