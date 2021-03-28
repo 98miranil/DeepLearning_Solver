@@ -64,5 +64,14 @@ def save_model(model):
     model.save(name_model+".h5")
     print("Model saved to disk")
 
+def load_model():
+    from keras.models import load_model
+    name_model = input("Name of the model you want to load: ")
+    model = load_model(name_model)
+    print("\n\n")
+    model.summary()
+    print("\n\n")
+    return model
+
 
 

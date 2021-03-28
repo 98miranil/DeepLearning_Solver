@@ -35,10 +35,19 @@ scalar_decision = input("Do you want to scale the data [Y/N]? \n")
 if(scalar_decision == "Y"):
     X_train, X_test = standarize.scale_data(X_train,X_test)
 
-model = create_model.define_manual_model(len(dataset.columns)-1)
-create_model.read_model(model)
-create_model.compile_manual_model(model)
-create_model.fit_model(model, X_train, y_train)
+#LOAD EXISTING MODEL
+load = input("\nDo you want to load a model [Y/N]? \n")
+if load == "Y":
+    model = create_model.load_model()
+
+#CREATE NEW MODEL
+else:
+    model = create_model.define_manual_model(len(dataset.columns)-1)
+    create_model.read_model(model)
+    create_model.compile_manual_model(model)
+    create_model.fit_model(model, X_train, y_train)
+
+#EVUALUATE MODEL
 print("\n\nYou have obtained:")
 evaluate_model.evaluate_model(model, X_test, y_test)
 save = input("\n\nDo you want to save the model [Y/N]? \n")
