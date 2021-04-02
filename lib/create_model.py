@@ -59,15 +59,17 @@ def fit_model(model, X_train, y_train):
     batch = int(input("Which batch size do you want? \n"))
     model.fit(X_train, y_train,epochs=epochs, batch_size=batch, verbose=0)
 
+#Saves the model inside the folder models
 def save_model(model):
     name_model = input("Name of the model saved: ")
-    model.save(name_model+".h5")
+    model.save("./models/"+name_model+".h5")
     print("Model saved to disk")
 
+#Loads the model from the models folder
 def load_model():
     from keras.models import load_model
     name_model = input("Name of the model you want to load: ")
-    model = load_model(name_model)
+    model = load_model('./models/'+name_model)
     print("\n\n")
     model.summary()
     print("\n\n")
